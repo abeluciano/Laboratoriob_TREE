@@ -106,6 +106,14 @@ void btree_Insertar(b_Tree b, int llave) {
     if(pos < b->numLLaves && b->LLaves[pos] == llave) {//mira si la llave ya existe
         return;
     }
+
+    if(b->esHoja) {//insertar una llave en una hoja
+        for(int i = b->numLLaves; i > pos; i--) {
+            b->LLaves[i] = b->LLaves[i-1];
+        }
+        b->LLaves[pos] = llave;
+        b->numLLaves++;
+    }
 }
 
 void btree_Print(b_Tree b) {
