@@ -113,7 +113,7 @@ void btree_Insertar(b_Tree b, int llave) {
         }
         b->LLaves[pos] = llave;
         b->numLLaves++;
-    }else{
+    }else{ // inserta una llave en un nodo no hoja y si el hijo correspondiente está lleno, se crea un nuevo hijo y se realiza una llamada recursiva para insertar la llave en el hijo apropiado
         if(b->hijos[pos]->numLLaves == MAX_LLAVES) {
             b_tree nuevo_hijo;
             nuevo_hijo = malloc(sizeof(*nuevo_hijo));
@@ -150,6 +150,15 @@ void btree_Print(b_Tree b) {
 
 int main(){
 ////// pruebe su código
-     btree_Crear();
+     b_Tree b = btree_Crear();
+     
+     btree_Insertar(b, 4);
+     btree_Insertar(b, 20);
+     btree_Insertar(b, 2);
+
+     printf("El arbol es: \n");
+     btree_Print("\n");
+
+     btree_Liberar(b);
     return 0;
 }
