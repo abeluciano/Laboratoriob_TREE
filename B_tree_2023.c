@@ -101,7 +101,11 @@ int btree_Buscar(b_Tree b, int llave) {
 
 
 void btree_Insertar(b_Tree b, int llave) {
-
+    int pos;
+    pos = btree_BuscarLLave(b->numLLaves, b->LLaves, llave); //busco el lugar para insertar
+    if(pos < b->numLLaves && b->LLaves[pos] == llave) {//mira si la llave ya existe
+        return;
+    }
 }
 
 void btree_Print(b_Tree b) {
