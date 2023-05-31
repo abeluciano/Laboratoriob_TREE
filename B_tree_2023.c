@@ -17,26 +17,23 @@ struct bt_Nodo {
 b_Tree btree_Crear(void);
 
 //////// liberar espacio */
-void btree_Liberar(b_Tree t);
+void btree_Liberar(b_Tree b);
 
 //////// funcion que devuelve un valor distinto de cero si la llave está presente en el árbol */
-int btree_Buscar(b_Tree t, int key);
+int btree_Buscar(b_Tree b, int key);
 
 //////// insertar un nuevo elemento en el árbol */
-/////// TAREA
-void btree_Insertar(b_Tree t, int key);
+void btree_Insertar(b_Tree b, int key);
 
 //////// imprimir todas las claves del árbol en orden */
-//////  TAREA
-void btree_Print(b_Tree t);
+void btree_Print(b_Tree b);
 
 
 
 
 
 
-b_Tree btree_Crear(void)
-{
+b_Tree btree_Crear(void) {
     b_Tree b;
     b = malloc(sizeof(*b));
     assert(b);
@@ -47,8 +44,7 @@ b_Tree btree_Crear(void)
     return b;
 }
 
-void btree_Liberar(b_Tree b)
-{
+void btree_Liberar(b_Tree b) {
     int i;
 
     if(!b->esHoja) {
@@ -62,8 +58,7 @@ void btree_Liberar(b_Tree b)
 
 //////// devuelve el índice más pequeño "i" en una matriz ordenada de modo que la llave <= a[i] */
 //////// (o n si no existe ese indice) */
-static int btree_BuscarLLave(int n, const int *a, int llave)
-{
+static int btree_BuscarLLave(int n, const int *a, int llave) {
     int inf;
     int sup;
     int med;
@@ -85,8 +80,7 @@ static int btree_BuscarLLave(int n, const int *a, int llave)
     return sup;
 }
 
-int btree_Buscar(b_Tree b, int llave)
-{
+int btree_Buscar(b_Tree b, int llave) {
     int pos;
 
     /* es vacio? */
@@ -106,10 +100,25 @@ int btree_Buscar(b_Tree b, int llave)
 
 
 
-//////// insertar un nuevo elemento en el árbol */
-/////// TAREA
-//////// imprimir todas las claves del árbol en orden */
-//////  TAREA
+void btree_Insertar(b_Tree b, int llave) {
+
+}
+
+void btree_Print(b_Tree b) {
+    int i;
+    if(b->esHoja) {
+        for(i = 0; i < b->numLLaves;i++) {
+            printf("%d", b->LLaves[i]);
+        }
+    } else {
+        for(i = 0; i < b->numLLaves; i++) {
+            btree_Print(b->hijos[i]);
+            printf("%d", b->LLaves[i]);
+        }
+        btree_Print(b->hijos[i]);
+    }
+}
+
 
 int main(){
 ////// pruebe su código
