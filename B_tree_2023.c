@@ -113,6 +113,22 @@ void btree_Insertar(b_Tree b, int llave) {
         }
         b->LLaves[pos] = llave;
         b->numLLaves++;
+    }else{
+        if(b->hijos[pos]->numLLaves == MAX_LLAVES) {
+            b_tree nuevo_hijo;
+            nuevo_hijo = malloc(sizeof(*nuevo_hijo));
+            assert(nuevo_hijo);
+
+            nuevo_hijo->esHoja = 0;
+            nuevo_hijo->numLLaves = 0;
+            nuevo_hijo->hijos[0] = b->hijos[pos];
+
+            b->hijos[pos] = nuevo_hijo;
+            b->numLLaves++;
+            btree_Insertar(nuevo_hijo, b->LLaves[pos]);
+            pos = btree_BuscarLLave(b->numLLaves, b->LLaves, llave);
+        }
+        btree_Insertar(b->hijos[pos], llave);
     }
 }
 
